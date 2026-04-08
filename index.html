@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soréll - Dinner, Decided.</title>
+<meta name="description" content="Stop thinking about dinner. Soréll scans your kitchen, knows your household's tastes, and tells you exactly what to cook tonight.">
+<meta property="og:title" content="Soréll - Dinner, Decided.">
+<meta property="og:description" content="Stop thinking about dinner. One app that scans your kitchen and decides what to cook tonight.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sorell.app">
+<meta property="og:image" content="https://sorell.app/tonight.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Soréll - Dinner, Decided.">
+<meta name="twitter:description" content="Stop thinking about dinner. Scans your kitchen. Decides dinner. Cooks with you.">
+<meta name="twitter:image" content="https://sorell.app/tonight.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--sage:#39574A;--sage-light:#4a7360;--sage-pale:rgba(57,87,74,0.06);--cream:#FAF7F2;--cream-deep:#F0EBE3;--charcoal:#1a1a1a;--muted:#777;--warm-white:#FFFDF9;--gold:#C9A84C}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Instrument Sans',sans-serif;background:var(--cream);color:var(--charcoal);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 28px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,247,242,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(57,87,74,0.06)}
+.nl{font-family:'Newsreader',serif;font-weight:500;font-size:20px;color:var(--charcoal);text-decoration:none;letter-spacing:-0.02em}
+.nl span{color:var(--sage);font-size:24px}
+.nc{background:var(--sage);color:#fff;border:none;padding:10px 24px;border-radius:100px;font-family:'Instrument Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.3s;letter-spacing:0.01em}
+.nc:hover{background:var(--sage-light);transform:translateY(-1px);box-shadow:0 4px 20px rgba(57,87,74,0.3)}
+
+/* HERO */
+.hero{max-width:1080px;margin:0 auto;padding:120px 32px 40px;display:flex;align-items:center;gap:40px;min-height:100vh}
+.ht{flex:1.2;max-width:500px}
+.hv{flex:0.8;display:flex;justify-content:center;position:relative}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--sage-pale);border:1px solid rgba(57,87,74,0.1);padding:6px 14px;border-radius:100px;font-size:11px;font-weight:700;color:var(--sage);margin-bottom:28px;text-transform:uppercase;letter-spacing:0.08em;animation:fu .7s ease both}
+.badge::before{content:'';width:6px;height:6px;background:var(--sage);border-radius:50%;animation:pd 2s ease infinite}
+@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+.hero h1{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:clamp(40px,5.5vw,62px);line-height:1.06;letter-spacing:-0.035em;color:var(--charcoal);margin-bottom:20px;animation:fu .7s ease .1s both}
+.hsub{font-size:clamp(15px,1.8vw,17px);color:var(--muted);line-height:1.65;margin-bottom:28px;animation:fu .7s ease .15s both;max-width:440px}
+.hctas{display:flex;flex-direction:column;gap:10px;animation:fu .7s ease .2s both}
+.cp{background:var(--sage);color:#fff;border:none;padding:15px 36px;border-radius:100px;font-family:'Instrument Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px;width:fit-content}
+.cp:hover{background:var(--sage-light);transform:translateY(-2px);box-shadow:0 8px 32px rgba(57,87,74,0.3)}
+.hmeta{font-size:11px;color:var(--muted);line-height:1.5}
+.hmeta strong{color:var(--sage);font-weight:600}
+
+/* PHONE MOCKUP - HERO */
+.phone-hero{position:relative;animation:fu .8s ease .25s both}
+.ph-main{width:240px;height:480px;border-radius:32px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.18),0 0 0 1px rgba(0,0,0,0.04);transform:perspective(1000px) rotateY(-4deg) rotateX(2deg);transition:transform .4s ease}
+.ph-main:hover{transform:perspective(1000px) rotateY(0deg) rotateX(0deg)}
+.ph-main img{width:100%;display:block}
+.ph-float{position:absolute;background:var(--warm-white);border-radius:14px;padding:10px 14px;box-shadow:0 8px 30px rgba(0,0,0,0.1);font-size:12px;animation:float 3s ease-in-out infinite}
+.ph-float.fit{top:15%;right:-48px;display:flex;align-items:center;gap:8px}
+.ph-float.fit .ring{width:36px;height:36px;border-radius:50%;border:3px solid var(--sage);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--sage)}
+.ph-float.safe{bottom:30%;left:-44px;color:var(--sage);font-weight:600;display:flex;align-items:center;gap:6px}
+.ph-float.safe::before{content:'✓';width:20px;height:20px;background:var(--sage);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* PROOF BAR */
+.proof{padding:28px 24px;border-top:1px solid rgba(57,87,74,0.06);border-bottom:1px solid rgba(57,87,74,0.06)}
+.proof-inner{max-width:800px;margin:0 auto;display:flex;justify-content:center;align-items:center;gap:40px;flex-wrap:wrap}
+.proof-item{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.proof-item strong{color:var(--charcoal);font-weight:600}
+
+/* FOUNDER - moved before features */
+.founder{padding:48px 24px;max-width:640px;margin:0 auto;text-align:center}
+.founder-label{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--sage);font-weight:700;margin-bottom:16px}
+.founder-quote{font-family:'Newsreader',serif;font-style:italic;font-size:clamp(18px,2.5vw,24px);line-height:1.5;color:var(--charcoal);margin-bottom:16px;letter-spacing:-0.01em}
+.founder-name{font-size:13px;color:var(--muted)}
+.founder-name strong{color:var(--charcoal)}
+
+/* SECTIONS */
+.section{padding:72px 24px;max-width:1000px;margin:0 auto}
+.sl{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--sage);font-weight:700;margin-bottom:12px}
+.st{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4vw,42px);line-height:1.12;letter-spacing:-0.02em;color:var(--charcoal);max-width:500px;margin-bottom:40px}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:48px}
+.step{display:flex;align-items:center;gap:40px}
+.step:nth-child(even){flex-direction:row-reverse}
+.step-c{flex:1.2}
+.step-v{flex:0.8;display:flex;justify-content:center}
+.step-phone{width:180px;height:360px;border-radius:24px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.12),0 0 0 1px rgba(0,0,0,0.03);transition:transform .3s}
+.step-phone:hover{transform:scale(1.02)}
+.step-phone img{width:100%;display:block}
+.sn{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--sage);color:#fff;border-radius:8px;font-family:'Newsreader',serif;font-weight:500;font-size:14px;margin-bottom:12px}
+.step h3{font-family:'Newsreader',serif;font-weight:500;font-size:26px;color:var(--charcoal);margin-bottom:10px}
+.step p{font-size:16px;color:var(--muted);line-height:1.65}
+
+/* FEATURES */
+.feat{background:var(--charcoal);padding:72px 24px;color:#fff}
+.feat-in{max-width:1000px;margin:0 auto}
+.feat .sl{color:rgba(255,255,255,0.3)}
+.feat .st{color:#fff}
+.fg{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.fc{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px 24px;transition:all .3s}
+.fc:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12)}
+.fc h3{font-family:'Newsreader',serif;font-weight:500;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.fc h3::before{content:'';width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fc:nth-child(1) h3::before{background:#5cb85c}
+.fc:nth-child(2) h3::before{background:var(--gold)}
+.fc:nth-child(3) h3::before{background:#5b9bd5}
+.fc:nth-child(4) h3::before{background:#d47b6a}
+.fc p{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.65;padding-left:16px}
+
+/* FAQ */
+.faq{padding:72px 24px;max-width:660px;margin:0 auto}
+.faq-i{border-bottom:1px solid rgba(57,87,74,0.08);padding:20px 0}
+.faq-q{font-family:'Newsreader',serif;font-weight:500;font-size:17px;color:var(--charcoal);margin-bottom:8px}
+.faq-a{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* WAITLIST */
+.wl{padding:72px 24px;background:var(--cream-deep)}
+.wl-in{max-width:460px;margin:0 auto;text-align:center}
+.wl h2{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:clamp(24px,3.5vw,34px);color:var(--charcoal);margin-bottom:10px}
+.wl p{font-size:14px;color:var(--muted);margin-bottom:24px}
+.wf{display:flex;gap:8px}
+.wi{flex:1;padding:13px 18px;border:1px solid rgba(57,87,74,0.12);border-radius:100px;font-family:'Instrument Sans',sans-serif;font-size:14px;background:var(--warm-white);outline:none;transition:border .2s}
+.wi:focus{border-color:var(--sage)}
+.wi::placeholder{color:#aaa}
+.wb{background:var(--sage);color:#fff;border:none;padding:13px 24px;border-radius:100px;font-family:'Instrument Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .25s;white-space:nowrap}
+.wb:hover{background:var(--sage-light)}
+.wl-note{font-size:11px;color:var(--muted);margin-top:10px;opacity:.6}
+
+/* FINAL CTA */
+.fcta{padding:100px 24px;text-align:center;position:relative}
+.fcta::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(57,87,74,0.04) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.fcta-in{max-width:520px;margin:0 auto;position:relative}
+.fcta h2{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4.5vw,44px);line-height:1.12;letter-spacing:-0.03em;color:var(--charcoal);margin-bottom:14px}
+.fcta>div p{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:28px}
+.fcta .spots{font-size:13px;color:var(--sage);font-weight:600;margin-top:14px}
+.fcta .tf-note{font-size:11px;color:var(--muted);margin-top:10px;opacity:.7;max-width:320px;margin-left:auto;margin-right:auto;line-height:1.5}
+
+/* FOOTER */
+footer{padding:32px 24px;text-align:center;border-top:1px solid rgba(57,87,74,0.06)}
+.fl{font-family:'Newsreader',serif;font-weight:500;font-size:15px;color:var(--charcoal);margin-bottom:8px}
+.fl span{color:var(--sage)}
+.flinks{display:flex;justify-content:center;gap:20px;margin-bottom:10px}
+.flinks a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--sage)}
+.fcopy{font-size:10px;color:var(--muted);opacity:.4}
+
+/* ANIMATIONS */
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.anim{opacity:0;transform:translateY(24px);transition:all .6s ease}
+.anim.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.hero{flex-direction:column;text-align:center;padding:100px 20px 32px;gap:28px}
+.ht{max-width:100%}
+.hsub{max-width:100%}
+.hctas{align-items:center}
+.ph-main{width:200px;height:400px;border-radius:28px;transform:none}
+.ph-float.fit{right:-16px;padding:8px 10px;font-size:11px}
+.ph-float.fit .ring{width:28px;height:28px;font-size:11px}
+.ph-float.safe{left:-12px;padding:8px 10px;font-size:11px}
+.proof-inner{gap:20px}
+.step,.step:nth-child(even){flex-direction:column;text-align:center}
+.step-phone{width:160px;height:320px;border-radius:20px}
+.fg{grid-template-columns:1fr}
+.section{padding:48px 20px}
+.feat{padding:48px 20px}
+.wf{flex-direction:column}
+nav{padding:12px 16px}
+.ph-float{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<a href="#" class="nl">soréll<span>.</span></a>
+<a href="https://testflight.apple.com/join/HdFrfCXc" class="nc">Try Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="ht">
+<div class="badge">Beta now open</div>
+<h1>Stop thinking about dinner.</h1>
+<p class="hsub">One app that knows your kitchen, your household's tastes, and exactly what to make tonight. No more arguments. No more takeout.</p>
+<div class="hctas">
+<a href="https://testflight.apple.com/join/HdFrfCXc" class="cp">Decide tonight's dinner &rarr;</a>
+<span class="hmeta">iPhone &middot; Free &middot; 2 min setup<br><strong>Only 153 of 500 beta spots remaining</strong></span>
+</div>
+</div>
+<div class="hv">
+<div class="phone-hero">
+<div class="ph-main"><img src="tonight.png" alt="Soréll app showing tonight's dinner recommendation"></div>
+<div class="ph-float fit"><div class="ring">91</div><span>Fit score</span></div>
+<div class="ph-float safe">Allergy safe</div>
+</div>
+</div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof">
+<div class="proof-inner">
+<div class="proof-item"><strong>565</strong> curated meals</div>
+<div class="proof-item"><strong>20+</strong> cuisines</div>
+<div class="proof-item"><strong>7</strong> allergen categories</div>
+<div class="proof-item"><strong>30 sec</strong> to decide dinner</div>
+</div>
+</div>
+
+<!-- FOUNDER - before features per reviewer feedback -->
+<section class="founder anim">
+<div class="founder-label">Why this exists</div>
+<p class="founder-quote">"Ingredients in the fridge. Nothing to eat. Too tired to think about dinner. I built Soréll for that exact moment - when everything is there, but your brain won't bridge it into a meal."</p>
+<p class="founder-name"><strong>Kash</strong> &middot; Founder</p>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+<div class="sl anim">How it works</div>
+<h2 class="st anim">3 taps. Dinner done.</h2>
+<div class="steps">
+<div class="step anim">
+<div class="step-c">
+<div class="sn">1</div>
+<h3>Scan your kitchen</h3>
+<p>Point your camera at your fridge or pantry. AI identifies what you have in seconds - quantities, locations, and what's expiring soon. Everything starts with what's actually in your kitchen.</p>
+</div>
+<div class="step-v"><div class="step-phone"><img src="tonight.png" alt="Kitchen scan results"></div></div>
+</div>
+<div class="step anim">
+<div class="step-c">
+<div class="sn">2</div>
+<h3>Pick your mood</h3>
+<p>Something fast? Comfort food? Feeling adventurous? Tap one card. The engine filters 565 meals down to the best options for your household - respecting every diet, dislike, and allergy.</p>
+</div>
+<div class="step-v"><div class="step-phone"><img src="first-dinner.png" alt="Mood selector with meal recommendations"></div></div>
+</div>
+<div class="step anim">
+<div class="step-c">
+<div class="sn">3</div>
+<h3>Cook hands-free</h3>
+<p>Step-by-step voice guidance from your choice of 8 AI voices. Interactive timers. Your phone stays clean while Emma or Drew walks you through every step.</p>
+</div>
+<div class="step-v"><div class="step-phone"><img src="cooking.png" alt="Voice-guided cooking with step by step instructions"></div></div>
+</div>
+</div>
+</section>
+
+<!-- FEATURES - cut to 4 -->
+<section class="feat">
+<div class="feat-in">
+<div class="sl anim">Built for real households</div>
+<h2 class="st anim">Intelligence you can actually feel.</h2>
+<div class="fg">
+<div class="fc anim">
+<h3>Allergen safety</h3>
+<p>Ingredient-level checks across 7 categories. If anyone in your household has a shellfish allergy, no meal with shrimp, crab, or lobster will ever appear. Not reduced in ranking - completely excluded.</p>
+</div>
+<div class="fc anim">
+<h3>Household harmony</h3>
+<p>She's gluten-free, he hates cilantro, the kids won't eat fish. The engine only suggests meals that genuinely work for everyone. No compromises. No arguments.</p>
+</div>
+<div class="fc anim">
+<h3>Weekly planning</h3>
+<p>A full 7-day dinner plan generated in seconds. Lock favorites, swap individual days, auto-generated grocery list. Sunday planning takes 30 seconds, not 30 minutes.</p>
+</div>
+<div class="fc anim">
+<h3>It learns you</h3>
+<p>Rate every meal after cooking. Loved meals get boosted. Hated meals disappear. Every dinner you cook makes tomorrow's recommendation smarter.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+<div class="sl anim">Real questions, real answers</div>
+<h2 class="st anim">Before you try it.</h2>
+<div class="faq-i anim">
+<p class="faq-q">Is it free?</p>
+<p class="faq-a">The beta is completely free. When we launch, there will be a free tier with core features and a premium plan at $9.99/month for unlimited recommendations, all 8 voices, and full weekly planning.</p>
+</div>
+<div class="faq-i anim">
+<p class="faq-q">What is TestFlight?</p>
+<p class="faq-a">TestFlight is Apple's official beta testing app. It's made by Apple, safe to use, and free. You install TestFlight from the App Store, then tap our link to get Soréll. Takes about 2 minutes.</p>
+</div>
+<div class="faq-i anim">
+<p class="faq-q">Does it work for one person, not just couples?</p>
+<p class="faq-a">Absolutely. Solo cooks get the same scan-to-cook experience. The household features just mean it works even better when more people are involved.</p>
+</div>
+<div class="faq-i anim">
+<p class="faq-q">How is this different from Mealime or Paprika?</p>
+<p class="faq-a">Those apps help you browse recipes and plan manually. Soréll decides for you. It scans what you actually have, accounts for everyone's dietary needs, and gives you one clear answer - not a list of 200 recipes to scroll through.</p>
+</div>
+<div class="faq-i anim">
+<p class="faq-q">What about food allergies?</p>
+<p class="faq-a">We check every ingredient against 7 allergen categories with 100+ keyword mappings. If anyone in your household has an allergy, no unsafe meal will ever be suggested. This is a hard exclusion - not a warning, not a filter you can forget to set.</p>
+</div>
+</section>
+
+<!-- WAITLIST -->
+<section class="wl">
+<div class="wl-in anim">
+<h2>Not on iPhone yet?</h2>
+<p>Join the waitlist. We'll let you know when Soréll launches on Android and the App Store.</p>
+<form class="wf" onsubmit="hw(event)">
+<input type="email" class="wi" placeholder="your@email.com" required>
+<button type="submit" class="wb">Notify me</button>
+</form>
+<p class="wl-note">No spam. Just a launch notification.</p>
+</div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="fcta">
+<div class="fcta-in">
+<h2 class="anim">What's for dinner tonight?</h2>
+<div><p class="anim">You'll know in 30 seconds. Scan your kitchen. Let Soréll handle the rest.</p></div>
+<a href="https://testflight.apple.com/join/HdFrfCXc" class="cp anim">Decide tonight's dinner &rarr;</a>
+<p class="spots anim">Only 153 of 500 beta spots remaining</p>
+<p class="tf-note anim">TestFlight is Apple's free, official beta testing platform. Install it from the App Store, then tap the link above. Your data is private and secure.</p>
+</div>
+</section>
+
+<footer>
+<div class="fl">soréll<span>.</span></div>
+<div class="flinks">
+<a href="/privacy">Privacy</a>
+<a href="/terms">Terms</a>
+<a href="/cdn-cgi/l/email-protection#e18a809289888792808c92a1868c80888dcf828e8c">Contact</a>
+</div>
+<div class="fcopy">&copy; 2026 Sams Labs LLC</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var e=document.querySelectorAll('.anim');
+if('IntersectionObserver' in window){
+var o=new IntersectionObserver(function(en){for(var i=0;i<en.length;i++){if(en[i].isIntersecting){en[i].target.classList.add('visible');o.unobserve(en[i].target)}}},{threshold:0.08});
+for(var j=0;j<e.length;j++){o.observe(e[j])}
+}else{for(var k=0;k<e.length;k++){e[k].classList.add('visible')}}
+function hw(ev){ev.preventDefault();var b=ev.target.querySelector('button');b.textContent='You\'re on the list!';b.style.background='#5cb8
