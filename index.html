@@ -189,6 +189,14 @@ footer{padding:28px 24px;text-align:center;border-top:1px solid rgba(57,87,74,0.
 .dark{padding:56px 20px}
 .wl-form{flex-direction:column}
 nav{padding:12px 16px}
+body{padding-bottom:64px}
+}
+
+/* STICKY MOBILE CTA */
+.sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;padding:12px 16px;background:rgba(250,247,242,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(57,87,74,0.08);text-align:center}
+.sticky-cta a{display:block;background:var(--sage);color:#fff;padding:14px;border-radius:100px;font-family:'Instrument Sans',sans-serif;font-size:15px;font-weight:600;text-decoration:none}
+@media(max-width:768px){
+.sticky-cta{display:block}
 }
 </style>
 </head>
@@ -204,7 +212,7 @@ nav{padding:12px 16px}
 <div class="hero-left">
 <div class="pill"><span class="pill-dot"></span>Beta now open</div>
 <h1>Stop thinking about dinner.</h1>
-<p class="hero-p">One app that knows your kitchen, your household's tastes, and exactly what to make tonight. No more arguments. No more takeout.</p>
+<p class="hero-p">You have food. You're just too tired to turn it into dinner. Soréll decides for you - in 30 seconds.</p>
 <div class="cta-wrap">
 <a href="https://testflight.apple.com/join/HdFrfCXc" class="cta">Decide tonight's dinner &rarr;</a>
 <span class="cta-sub">iPhone &middot; Free &middot; 2 min setup<br><b>Only 153 of 500 beta spots remaining</b></span>
@@ -294,11 +302,17 @@ nav{padding:12px 16px}
 </div>
 </section>
 
+<!-- TENSION -->
+<section style="padding:64px 24px;max-width:620px;margin:0 auto;text-align:center" class="reveal">
+<p style="font-family:'Newsreader',serif;font-style:italic;font-size:clamp(20px,2.8vw,28px);line-height:1.5;letter-spacing:-0.02em;color:var(--text)">No more staring at a full fridge with nothing to eat.<br>No more "what do you want?" "I don't know, what do you want?"<br>No more giving up and ordering DoorDash.</p>
+<p style="margin-top:20px;font-size:15px;color:var(--sage);font-weight:600">Soréll decides. You cook.</p>
+</section>
+
 <!-- FEATURES -->
 <section class="dark">
 <div class="dark-in">
 <div class="sec-tag reveal">Built for real households</div>
-<h2 class="sec-h reveal">Intelligence you can actually feel.</h2>
+<h2 class="sec-h reveal">We decide dinner. You just cook.</h2>
 <div class="cards">
 <div class="card reveal">
 <h3>Allergen safety</h3>
@@ -369,6 +383,8 @@ nav{padding:12px 16px}
 <p class="tf reveal">TestFlight is Apple's free, official beta testing platform. Install it from the App Store, then tap the link above.</p>
 </div>
 </section>
+
+<div class="sticky-cta"><a href="https://testflight.apple.com/join/HdFrfCXc">Decide tonight's dinner &rarr;</a></div>
 
 <footer>
 <div class="ft-logo">soréll<span>.</span></div>
